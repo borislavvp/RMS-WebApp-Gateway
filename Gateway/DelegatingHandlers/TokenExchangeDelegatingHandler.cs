@@ -87,7 +87,7 @@ namespace Gateway.DelegatingHandlers
                 GrantType = "urn:ietf:params:oauth:grant-type:token-exchange",
                 Parameters = customParams,
                 ClientId = "proepwebsitegatewaytodownstreamtokenexchangeclient",
-                ClientSecret = "0cdea0bc-779e-4368-b46b-09956f70712d"
+                ClientSecret = "4edwe2qc-992u-1157-t57h-86539r11284g"
             });
 
             if (tokenResponse.IsError)

@@ -33,7 +33,7 @@ namespace Gateway
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost")
+                    builder => builder.WithOrigins(Configuration.GetValue<string>("WebsiteUrl"))
                         .AllowCredentials()
                         .AllowAnyMethod()
                         .AllowAnyHeader());
