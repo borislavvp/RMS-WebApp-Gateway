@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-gateway
+  namespace:  ingress
+  labels:
+    app: website-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: website-gateway
+  template:
+    metadata:
+      labels:
+        app: website-gateway
+    spec:
+      containers:
+      - name: website-gateway
+        image: acrproep01.azurecr.io/website-gateway:v1.3
+        ports:
+        - containerPort: 80
