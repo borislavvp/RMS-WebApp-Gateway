@@ -19,9 +19,6 @@ namespace Gateway
         {
             Configuration = configuration;
         }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAccessTokenManagement();
@@ -35,7 +32,7 @@ namespace Gateway
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.WithOrigins("http://localhost:4201")
+                    builder => builder.WithOrigins("http://localhost")
                         .AllowCredentials()
                         .AllowAnyMethod()
                         .AllowAnyHeader());

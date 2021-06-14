@@ -25,7 +25,6 @@ namespace Gateway.DelegatingHandlers
         {
             var item = await _clientAccessTokenCache
                 .GetAsync("proepwebsitegatewaytodownstreamtokenexchangeclient_api");
-            var asd = DateTime.Now;
             if (item != null)
             {
                 return item.AccessToken;
@@ -79,8 +78,7 @@ namespace Gateway.DelegatingHandlers
             {
                 { "subject_token_type", "urn:ietf:params:oauth:token-type:access_token"},
                 { "subject_token", incomingToken},
-
-                { "scope", "openid profile meals.read basket.fullaccess orders.write" }
+                { "scope", "openid profile meals.read basket.fullaccess orders.read orders.write" }
             });
 
             var tokenResponse = await client.RequestTokenAsync(new TokenRequest()
@@ -89,9 +87,7 @@ namespace Gateway.DelegatingHandlers
                 GrantType = "urn:ietf:params:oauth:grant-type:token-exchange",
                 Parameters = customParams,
                 ClientId = "proepwebsitegatewaytodownstreamtokenexchangeclient",
-
-                // TODO: wtf is this?>
-                ClientSecret = "0cdea0bc-779e-4368-b46b-09956f70712c"
+                ClientSecret = "0cdea0bc-779e-4368-b46b-09956f70712d"
             });
 
             if (tokenResponse.IsError)
