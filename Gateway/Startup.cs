@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Http;
 using Gateway.DelegatingHandlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -38,14 +39,20 @@ namespace Gateway
                         .AllowAnyHeader());
             });
 
+            // Disable certificates checking because we dont support them 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                    .AddJwtBearer(AuthenticationScheme, options =>
                    {
                        options.Authority = Authority;
                        options.Audience = Audience;
+                       options.BackchannelHttpHandler = new HttpClientHandler
+                       { ServerCertificateCustomValidationCallback = delegate { return true; } };
                    });
 
-            services.AddHttpClient();
+            // Disable certificates checking because we dont support them 
+            services.AddHttpClient("client")
+                .ConfigurePrimaryHttpMessageHandler((context) => new HttpClientHandler
+                { ServerCertificateCustomValidationCallback = delegate { return true; } });
 
             services.AddScoped<TokenExchangeDelegatingHandler>();
 
