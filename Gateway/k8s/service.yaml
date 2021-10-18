@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+ name: website-gateway-service
+ namespace:  ingress
+spec:
+ type: ClusterIP 
+ selector:
+    app: website-gateway
+ ports:
+  - port: 80
